@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const route = require('./routes/route.js');
 const  {default:mongoose}  = require('mongoose');
 const moment = require("moment")
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -23,7 +24,7 @@ app.use(
     }
     
 );
-app.use('/', route);
+app.use('/functionup', route);
 
 
 app.listen(process.env.PORT || 3000, function () { 
