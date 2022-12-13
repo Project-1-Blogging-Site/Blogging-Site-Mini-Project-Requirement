@@ -7,7 +7,7 @@ const blogController = require ("../controllers/blogController")
 const middleware = require("../middlewares/authentication")
 
 
-router.post("/createAuthor", authorController.createAuthor)
+router.post("/register", authorController.createAuthor)
 
 router.post("/login",authorController.login)
 

@@ -3,12 +3,15 @@ const jwt = require("jsonwebtoken")
 
 const createAuthor = async (req, res) => {
   try {
-    if (!req.body.firstName || !req.body.email || !req.body.password)
+
+    const data = req.body
+    const {title,firstName,lastName ,email,password} = data
+    if (!firstName || !email || !password || !title)
       return res.status(400).send("name,email,passwords are a required field");
     
-    const savedData = await authorModel.create(req.body);
+    const savedData = await authorModel.create(data);
     
-    return res.status(200).send({ msg: savedData });
+    return res.status(200).send({ status :true ,message: savedData });
   } catch (error) {
     return res.status(500).send({ status: false, message: error.message });
   }

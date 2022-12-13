@@ -1,11 +1,22 @@
 const express = require('express');
 var bodyParser = require('body-parser');
-
+const cors = require('cors')
 const route = require('./routes/route.js');
 
 
 const app = express();
 
+
+app.use(cors({
+  //origin:true,credentials:true
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+
+
+}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
  //mongodb+srv://Abhijith:Abhijith@cluster0.w7nwz.mongodb.net/abhijith?authSource=admin&replicaSet=atlas-darc46-shard-0&readPreference=primary&ssl=true
