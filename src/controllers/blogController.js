@@ -23,7 +23,23 @@ const createBlog = async function (req, res) {
   }
 };
 
-const getBlogs = async function (req, res) {
+
+const getBlogList = async function (req, res) {
+  try {
+    data = req.query;
+    const blogs = await blogModel.find({
+      $and: [data, { isDeleted: false }, { isPublished: true }],
+    });
+    if (blogs.length == 0) {
+      return res.status(404).send({ status: false, msg: "no blogs" });
+    }
+    return res.status(200).send({ status: true, data: blogs });
+  } catch (err) {
+    res.status(500).send({ status: false, err: err.message });
+  }
+};
+
+const getBlogByQuery = async function (req, res) {
   try {
     data = req.query;
     const blogs = await blogModel.find({
@@ -120,7 +136,8 @@ const deleteQuery = async function (req, res) {
 };
 
 module.exports.createBlog = createBlog;
-module.exports.getBlogs = getBlogs;
+module.exports.getBlogByQuery = getBlogByQuery;
+module.exports.getBlogList = getBlogList;
 module.exports.updateBlog = updateBlog;
 module.exports.deleteBlog = deleteBlog;
 module.exports.deleteQuery = deleteQuery;
