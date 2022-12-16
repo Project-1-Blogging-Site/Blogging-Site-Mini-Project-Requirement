@@ -11,14 +11,24 @@ router.post("/register", authorController.createAuthor)
 
 router.post("/login",authorController.login)
 
-router.post("/createBlog", middleware.authenticate, blogController.createBlog)
-router.get("/getBlogs",middleware.authenticate, blogController.getBlogByQuery)
-router.put("/updateBlog/:blogId",middleware.authenticate, middleware.authorise, blogController.updateBlog)
-router.delete("/deleteBlog/:blogId",middleware.authenticate, middleware.authorise, blogController.deleteBlog)
-router.delete("/deleteQuery", middleware.authenticate, middleware.authorise, blogController.deleteQuery)
+//use authentiction for every blog API
 
+// router.post("/createBlog",middleware.authenticate,  blogController.createBlog)
+// router.get("/getBlogs",middleware.authenticate, blogController.getBlogByQuery)
+// router.put("/updateBlog/:blogId",middleware.authenticate, middleware.authorise, blogController.updateBlog)
+// router.delete("/deleteBlog/:blogId",middleware.authenticate, middleware.authorise, blogController.deleteBlog)
+// router.delete("/deleteQuery", middleware.authenticate, middleware.authorise, blogController.deleteQuery)
+
+// react testing
 
 router.get("/", blogController.getBlogList)
+
+router.post("/createBlog",middleware.authenticate,  blogController.createBlog)
+router.get("/getBlogs",middleware.authenticate, blogController.getBlogByQuery)
+router.put("/updateBlog/:blogId", blogController.updateBlog)
+router.put("/deleteBlog/:blogId", blogController.deleteBlog)
+router.delete("/deleteQuery", middleware.authenticate, middleware.authorise, blogController.deleteQuery)
+
 
 
 module.exports=router

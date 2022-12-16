@@ -2,6 +2,7 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const cors = require('cors')
 const route = require('./routes/route.js');
+const moment = require('moment')
 
 
 const app = express();
@@ -35,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // middleware 
 app.use(
   function(req,res, next){
-    let date = new Date
+    let date = moment().format('LLLL')
     let ip = req.ip
     let url= req.url
 console.log(date,ip,url) 

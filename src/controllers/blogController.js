@@ -56,14 +56,23 @@ const getBlogByQuery = async function (req, res) {
 
 const updateBlog = async function (req, res) {
   try {
-    let blogId = req.params.blogId;
+    let blogId = req.params.blogId ;
+   
     let Details = await blogModel.findById(blogId);
+
+    if (!Details)
+      return res
+        .status(404)
+        .send({ status: false, msg: "NO Blog found" });
+
+
+
     if (Details.isDeleted == true)
       return res
         .status(400)
         .send({ status: false, msg: "Blog already deleted" });
 
-    let { title, body, tags, subcategory, category, published } = req.body;
+    let { title, body, tags, subcategory, category } = req.body;
     let update = await blogModel.findByIdAndUpdate(
       { _id: blogId },
       {
@@ -79,7 +88,7 @@ const updateBlog = async function (req, res) {
         { _id: blogId },
         {
           published: true,
-          publishedAt: moment().format(),
+          publishedAt: moment().format('LLLL'),
         },
         { new: true }
       );

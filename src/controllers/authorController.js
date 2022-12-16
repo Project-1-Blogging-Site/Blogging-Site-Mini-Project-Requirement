@@ -55,7 +55,7 @@ const login = async function (req, res) {
     }, "project-one");
 
     res.setHeader("x-api-key", token);
-    res.status(200).send({ status: true, data: token });
+  return  res.status(200).send({ status: true, data: token });
 
   }
   catch (err) {

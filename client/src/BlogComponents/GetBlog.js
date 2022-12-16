@@ -62,9 +62,10 @@ const GetBlog = () => {
                         <td key={i}><h2>{item.title} </h2></td>
                         <td style={{"paddingLeft" :"70px"}} ><h3>{item.body} </h3></td>
 
-                        <td  style={{"paddingLeft" :"370px"}}  > {item.category} </td>
-
+                        <td  style={{"paddingLeft" :"370px"}}  > {item.category}   </td>
+                      
                         <td style={{"paddingLeft" :"150px"}} >{item.tags}</td>
+                      
                     </tr>
                     </li>
                     </div>
