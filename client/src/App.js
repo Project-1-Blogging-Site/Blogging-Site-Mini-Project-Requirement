@@ -5,6 +5,7 @@ import LoginAuthor from './AuthorComponents/LoginAuthor';
 import GetBlog from './BlogComponents/GetBlog';
 import CreateBlog from './BlogComponents/CreateBlog';
 import UpdateBlog from './BlogComponents/UpdateBlog';
+import DeleteQuery from './BlogComponents/DeleteQuery';
 //import GetBlogsByQuery from './BlogComponents/GetBlogsByQuery';
 
 import DeleteBlog from './BlogComponents/DeleteBlog';
@@ -27,6 +28,8 @@ function App() {
           {/* <Route path='/getBlogs' element={<GetBlogsByQuery />} /> */}
 
           <Route path='/deleteBlog/:blogId' element={<DeleteBlog />} />
+
+          <Route path='/deleteQuery' element={<DeleteQuery />} />
 
 
           </Routes>

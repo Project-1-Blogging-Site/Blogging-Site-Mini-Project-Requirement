@@ -127,11 +127,12 @@ const deleteBlog = async function (req, res) {
 
 const deleteQuery = async function (req, res) {
   try {
-    let anyData = req.query;
-    let obj = await blogModel.find(anyData);
+    let title = req.query.title;
+    let obj = await blogModel.find({title:title , isDeleted :false});
+    console.log(obj)
     if (!obj.length)
-      return res.status(400).send({ status: false, msg: "BAD REQ" });
-    let delData = await blogModel.updateMany(
+      return res.status(400).send({ status: false, msg: "BAD REQ :- No blog found with this title" });
+    let delData = await blogModel.updateOne(
       { obj },
       { isDeleted: true, deletedAt: Date.now() },
       { new: true }

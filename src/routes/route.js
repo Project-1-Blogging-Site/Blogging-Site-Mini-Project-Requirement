@@ -23,11 +23,11 @@ router.post("/login",authorController.login)
 
 router.get("/", blogController.getBlogList)
 
-router.post("/createBlog",middleware.authenticate,  blogController.createBlog)
+router.post("/createBlog",  blogController.createBlog)
 router.get("/getBlogs",middleware.authenticate, blogController.getBlogByQuery)
 router.put("/updateBlog/:blogId", blogController.updateBlog)
 router.put("/deleteBlog/:blogId", blogController.deleteBlog)
-router.delete("/deleteQuery", middleware.authenticate, middleware.authorise, blogController.deleteQuery)
+router.get("/deleteQuery", blogController.deleteQuery)
 
 
 

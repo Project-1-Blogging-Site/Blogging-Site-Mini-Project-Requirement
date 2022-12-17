@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+// working fine,frontend display err left
 const CreateBlog = () => {
     const [blog, setBlog] = useState({
         title: '',
