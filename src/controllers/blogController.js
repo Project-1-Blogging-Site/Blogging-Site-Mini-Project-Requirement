@@ -108,17 +108,17 @@ const deleteBlog = async function (req, res) {
     let blogId = req.params.blogId;
 
     let deleteData = await blogModel.findById({ _id: blogId });
-    if (!deleteData) return res.status(404).send({ msg: "incorrect data" });
+    if (!deleteData) return res.status(404).send({status: false, message: "Blog not found" });
 
     if (deleteData.isDeleted == true)
-      return res.status(404).send({ msg: "user already deleted" });
+      return res.status(404).send({status: false, message: `Blog : ${deleteData.title} --- already deleted` });
     let updateDelete = await blogModel.findOneAndUpdate(
       { _id: blogId },
       { isDeleted: true, deletedAt: Date.now() },
       { new: true }
     );
     if (updateDelete)
-      res.status(200).send({ status: true, data: updateDelete });
+      res.status(200).send({ status: true,message:`${updateBlog} deleted successfully`, data: updateDelete });
   } catch (err) {
     console.log(err.message);
     res.status(500).send({ error: err.message });

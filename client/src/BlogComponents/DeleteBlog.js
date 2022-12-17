@@ -1,48 +1,54 @@
+import {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom';
 
-// import { useState } from "react";
-// import { useParams ,Link } from "react-router-dom";
-import GetBlog from "./GetBlog";
-//import { Link } from "react-router-dom";
-//we'll have to fix it
+// this API deletes the blog on click
+const DeleteBlog =()=>{
 
-const DeleteBlog = () => {
-    //console.log(GetBlog)
-return(
-    <div>
-        
-        <GetBlog title ={GetBlog.map(data=>(<li>{data.title}</li>))}/>
-    </div>
-)
+    const [data , setData] = useState([]);
+
+    const params =useParams();
+
+    useEffect(()=>{
+
+        fetch(`http://localhost:4000/deleteBlog/${params.blogId}`,{
+            method:"PUT"
+        }).then((res)=>res.json())
+        // .then(res=> {
+        //     if(!res.status){
+        //         window.alert(`Message: ${res.message}`)
+        //     }
+        // return;
+        // })
+        .then((data)=>setData(data))
+        .catch(err=>console.log(err))
+    },[params])
+console.log(data)
+    return(
+        <div>
+{/* <ul>{ data && data.map(item=>(<li key={data._id}>{item.title}</li>))}</ul> */}
 
 
+{(!data.status) ? (<h2 style={{marginLeft:"30%" , marginTop:"20%", color:"red"}}>{  data.message}</h2>) : <h2 style={{marginLeft:"40%" , marginTop:"20%", color:"green"}}>Blog deleted successfully</h2>} 
 
-//     const params = useParams()
-//     const [blog, setBlog] = useState([])
-//     // const handleChange = (e) => {
-//     //     setBlog({ ...blog, [e.target.name]: e.target.value })
-//     // }
+{}
 
-//     const handleDelete = async (e) => {
-//         e.preventDefault()
+{/* {
+    (()=>{
+        if (!data.status) {
 
-//         const blogData = { ...blog }
-// console.log(blogData)
-//       const fetchedData =  await fetch(`http://localhost:4000/deleteBlog/${params.blogId}`, {
-//             method: "PUT",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify(blogData)
-//         }).then(res => setBlog(res.json())).then(res => console.log(res)).catch(err => console.log(err))
-//         console.log(fetchedData)
+            return ( <h2 style={{marginLeft:"40%" , marginTop:"20%", color:"red"}}>{ !data.status && data.message}</h2> )
        
-//     }
+        } else {
+            return ( <h2 style={{marginLeft:"40%" , marginTop:"20%", color:"green"}}>{data.data && data.data.body} : deleted successfully</h2>  )
+        }
+    })
+} */}
 
-//     return (
-//         <div>
-// <ol>{[blog].map((item, i)=>(<div key={i}><li key={item._id} ><Link  onClick={handleDelete}>{item.title}</Link></li></div>))}</ol>
-//         </div>
-//     )
+
+
+        </div>
+    )
+
 }
 
-export default DeleteBlog;
+export default DeleteBlog
