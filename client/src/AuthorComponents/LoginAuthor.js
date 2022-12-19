@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import '../App.css'
 // This API working Fine
 
@@ -11,7 +11,7 @@ const LoginAuthor = () => {
         password: ''
 
     })
-const {setAuthorData} = useContext(createContext(''))
+
 
 
     const handleChange = (e) => {
@@ -30,15 +30,12 @@ const {setAuthorData} = useContext(createContext(''))
                 },
                 body: JSON.stringify(authorData)
     
-            })
+            }).then(res=>res.json()).catch(err=>console.log(err + "err from fetch promise"))
+            console.log(loginResponse.data)
+           
             
-            setAuthorData({
-                token : loginResponse.data.token,
-                author : loginResponse.data.author
-
-            })
-            console.log(setAuthorData)
-            localStorage.setItem("x-api-key",loginResponse.data.token)
+           localStorage.setItem("x-api-key",loginResponse.data) //clg will give undefined because u can't see secret tokeb
+            console.log(localStorage.getItem("x-api-key")) // u can acces token by this method
         
             
         } catch (err) {
